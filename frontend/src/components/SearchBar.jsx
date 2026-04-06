@@ -89,7 +89,7 @@ export default function SearchBar({ onSearch, isLoading }) {
             className="search-input-glow w-full rounded-xl px-4 py-3.5 pl-9 text-sm font-mono
                        placeholder:text-gray-600 transition-all"
             style={{
-              background: '#07103A',
+              background: '#040C2E',
               border: '1px solid rgba(0, 255, 255, 0.2)',
               color: 'white',
             }}

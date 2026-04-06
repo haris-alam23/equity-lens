@@ -20,7 +20,7 @@
 
 @layer components {
   .card {
-    background: #07103A;
+    background: #040C2E;
     border: 1px solid rgba(0, 255, 255, 0.12);
     @apply rounded-2xl p-6;
     transition: box-shadow 0.3s ease, border-color 0.3s ease;
@@ -45,9 +45,9 @@
 .shimmer {
   background: linear-gradient(
     90deg,
-    #07103A 0%,
+    #040C2E 0%,
     #0D1B6E 40%,
-    #07103A 80%
+    #040C2E 80%
   );
   background-size: 200% 100%;
   animation: shimmer 1.6s ease-in-out infinite;

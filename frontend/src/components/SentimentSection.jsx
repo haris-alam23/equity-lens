@@ -78,7 +78,7 @@ export default function SentimentSection({ data, loading, error }) {
             <Tooltip
               formatter={(v) => [`${v.toFixed(1)}%`, '']}
               contentStyle={{
-                background: '#07103A',
+                background: '#040C2E',
                 border: '1px solid rgba(99, 102, 241, 0.2)',
                 borderRadius: '8px',
                 fontSize: '12px',

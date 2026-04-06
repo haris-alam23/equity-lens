@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         surface: '#020818',
-        card: '#07103A',
+        card: '#040C2E',
         border: '#0D1B6E',
         accent: '#0000FF',
         'accent-light': '#00FFFF',
