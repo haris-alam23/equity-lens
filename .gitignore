@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# ML artifacts
+ml/saved_model.pkl
+ml/saved_scaler.pkl
+
+# Node
+node_modules/
+dist/
+.DS_Store
+
+# Vite
+frontend/.env
+frontend/dist/
