@@ -9,13 +9,20 @@ function SignalGauge({ score }) {
   const color =
     score >= 60 ? '#22c55e' : score <= 40 ? '#ef4444' : '#f59e0b'
 
+  const glowColor =
+    score >= 60
+      ? 'rgba(34, 197, 94, 0.3)'
+      : score <= 40
+      ? 'rgba(239, 68, 68, 0.3)'
+      : 'rgba(245, 158, 11, 0.3)'
+
   return (
-    <svg width="140" height="80" viewBox="0 0 140 80">
+    <svg width="140" height="80" viewBox="0 0 140 80" style={{ filter: `drop-shadow(0 0 8px ${glowColor})` }}>
       {/* Track */}
       <path
         d="M 16 72 A 54 54 0 0 1 124 72"
         fill="none"
-        stroke="#2a2d3a"
+        stroke="#1a1d2e"
         strokeWidth="10"
         strokeLinecap="round"
       />
@@ -39,27 +46,35 @@ function SignalGauge({ score }) {
 }
 
 function labelStyles(label) {
-  if (label === 'Bullish') return 'bg-green-950 text-bullish border-green-800'
-  if (label === 'Bearish') return 'bg-red-950 text-bearish border-red-800'
-  return 'bg-yellow-950 text-neutral border-yellow-800'
+  if (label === 'Bullish') return { bg: 'rgba(34, 197, 94, 0.1)', border: 'rgba(34, 197, 94, 0.3)', color: '#22c55e' }
+  if (label === 'Bearish') return { bg: 'rgba(239, 68, 68, 0.1)', border: 'rgba(239, 68, 68, 0.3)', color: '#ef4444' }
+  return { bg: 'rgba(245, 158, 11, 0.1)', border: 'rgba(245, 158, 11, 0.3)', color: '#f59e0b' }
 }
 
 export default function MarketSignal({ data, loading, error }) {
-  if (loading) return <LoadingCard title="Computing market signal..." />
+  if (loading) return <LoadingCard type="signal" />
   if (error) return <ErrorCard message={error} />
   if (!data) return null
 
   const { score, label, explanation } = data
+  const styles = labelStyles(label)
 
   return (
-    <div className="card">
-      <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-5">
+    <div className="card animate-fade-in-up-3">
+      <h3 className="text-xs font-semibold tracking-widest mb-5 uppercase" style={{ color: 'rgba(99,102,241,0.7)' }}>
         Market Signal
       </h3>
 
       <div className="flex flex-col items-center mb-4">
         <SignalGauge score={score} />
-        <span className={`label-tag border mt-3 ${labelStyles(label)}`}>
+        <span
+          className="label-tag border mt-3 text-xs"
+          style={{
+            background: styles.bg,
+            borderColor: styles.border,
+            color: styles.color,
+          }}
+        >
           {label === 'Bullish' && '↑ '}
           {label === 'Bearish' && '↓ '}
           {label === 'Neutral' && '→ '}
@@ -67,14 +82,17 @@ export default function MarketSignal({ data, loading, error }) {
         </span>
       </div>
 
-      <div className="mt-4 p-4 bg-surface rounded-xl border border-border">
-        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">
+      <div
+        className="mt-4 p-4 rounded-xl"
+        style={{ background: 'rgba(8, 10, 15, 0.6)', border: '1px solid rgba(99, 102, 241, 0.1)' }}
+      >
+        <p className="text-xs font-semibold uppercase tracking-widest mb-1.5" style={{ color: 'rgba(99,102,241,0.5)' }}>
           Explanation
         </p>
         <p className="text-sm text-gray-300 leading-relaxed">{explanation}</p>
       </div>
 
-      <div className="mt-3 flex justify-between text-xs text-gray-600 font-mono px-1">
+      <div className="mt-3 flex justify-between text-xs text-gray-700 font-mono px-1">
         <span>0 — Bearish</span>
         <span>50 — Neutral</span>
         <span>100 — Bullish</span>
@@ -85,7 +103,7 @@ export default function MarketSignal({ data, loading, error }) {
 
 function ErrorCard({ message }) {
   return (
-    <div className="card border-red-900/40 bg-red-950/20">
+    <div className="card" style={{ borderColor: 'rgba(239, 68, 68, 0.2)', background: 'rgba(239, 68, 68, 0.05)' }}>
       <p className="text-sm text-red-400">{message}</p>
     </div>
   )

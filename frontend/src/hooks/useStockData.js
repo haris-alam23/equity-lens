@@ -21,7 +21,7 @@ export function useStockData() {
   const [errors, setErrors] = useState(initialState)
   const [activeTicker, setActiveTicker] = useState(null)
 
-  const search = useCallback(async (ticker) => {
+  const search = useCallback(async (ticker, period = '3mo') => {
     const t = ticker.trim().toUpperCase()
     if (!t) return
 
@@ -45,7 +45,7 @@ export function useStockData() {
         })
 
     await Promise.all([
-      handle('stock', fetchStock(t)),
+      handle('stock', fetchStock(t, period)),
       handle('sentiment', fetchSentiment(t)),
       handle('signal', fetchSignal(t)),
       handle('prediction', fetchPrediction(t)),

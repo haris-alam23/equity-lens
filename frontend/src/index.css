@@ -2,15 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-surface text-white antialiased;
+    background: #080a0f;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 30% at 80% 10%, rgba(139, 92, 246, 0.06) 0%, transparent 50%);
+    background-attachment: fixed;
   }
 }
 
 @layer components {
   .card {
-    @apply bg-card border border-border rounded-2xl p-6;
+    background: #0e1117;
+    border: 1px solid rgba(99, 102, 241, 0.15);
+    @apply rounded-2xl p-6;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .card:hover {
+    box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.2), 0 8px 32px rgba(99, 102, 241, 0.08);
+    border-color: rgba(99, 102, 241, 0.25);
   }
 
   .label-tag {
@@ -18,14 +36,132 @@
   }
 }
 
-/* Custom scrollbar */
+/* ─── Shimmer skeleton animation ─────────────────────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    #1a1d27 0%,
+    #2a2d3a 40%,
+    #1a1d27 80%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+/* ─── Fade-in card animations ─────────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+.animate-fade-in-up-1 { animation: fadeInUp 0.4s ease 0ms forwards; opacity: 0; }
+.animate-fade-in-up-2 { animation: fadeInUp 0.4s ease 100ms forwards; opacity: 0; }
+.animate-fade-in-up-3 { animation: fadeInUp 0.4s ease 200ms forwards; opacity: 0; }
+.animate-fade-in-up-4 { animation: fadeInUp 0.4s ease 300ms forwards; opacity: 0; }
+.animate-fade-in-up-5 { animation: fadeInUp 0.4s ease 400ms forwards; opacity: 0; }
+
+/* ─── Ticker tape animation ───────────────────────────────────────────────── */
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-track {
+  display: flex;
+  animation: ticker-scroll 30s linear infinite;
+  will-change: transform;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* ─── Gradient text ───────────────────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Glow search focus ───────────────────────────────────────────────────── */
+.search-input-glow:focus {
+  border-color: rgba(99, 102, 241, 0.7) !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15), 0 0 20px rgba(99, 102, 241, 0.1);
+  outline: none;
+}
+
+/* ─── Custom scrollbar ────────────────────────────────────────────────────── */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0f1117;
+  background: #080a0f;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2a2d3a;
+  background: rgba(99, 102, 241, 0.3);
   border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.5);
+}
+
+/* ─── Divider ─────────────────────────────────────────────────────────────── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.2), transparent);
+  margin: 1.5rem 0;
+}
+
+/* ─── Accent chip ─────────────────────────────────────────────────────────── */
+.recent-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #a5b4fc;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.recent-chip:hover {
+  background: rgba(99, 102, 241, 0.18);
+  border-color: rgba(99, 102, 241, 0.4);
+  color: #c7d2fe;
+}
+
+.recent-chip-x {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  color: rgba(165, 180, 252, 0.5);
+  transition: color 0.15s;
+}
+
+.recent-chip-x:hover {
+  color: #c7d2fe;
 }

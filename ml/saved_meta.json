@@ -1,0 +1,6 @@
+{
+  "accuracy": null,
+  "trained_on": "SPY",
+  "trained_at": null,
+  "note": "Run train_model() to populate accuracy. This file is auto-generated on training."
+}

@@ -1,3 +1,4 @@
+import asyncio
 from fastapi import APIRouter, HTTPException
 from app.services.signal_service import compute_signal
 from app.services.sentiment_service import get_sentiment_analysis
@@ -9,7 +10,8 @@ router = APIRouter()
 async def get_signal(ticker: str):
     try:
         sentiment = await get_sentiment_analysis(ticker.upper())
-        return compute_signal(
+        return await asyncio.to_thread(
+            compute_signal,
             ticker.upper(),
             sentiment["avg_score"],
             sentiment["pct_positive"],
