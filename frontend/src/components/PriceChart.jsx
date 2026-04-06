@@ -206,10 +206,10 @@ export default function PriceChart({ data: initialData, loading: externalLoading
             type="monotone"
             dataKey="close"
             name="Close"
-            stroke="#0000FF"
+            stroke="#00FFFF"
             strokeWidth={2}
             dot={false}
-            activeDot={{ r: 4, fill: '#0000FF' }}
+            activeDot={{ r: 4, fill: '#00FFFF' }}
           />
           <Line
             type="monotone"
