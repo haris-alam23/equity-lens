@@ -9,6 +9,9 @@ venv/
 # ML artifacts
 ml/saved_model.pkl
 ml/saved_scaler.pkl
+ml/saved_model_*.pkl
+ml/saved_scaler_*.pkl
+ml/saved_meta_*.json
 
 # Node
 node_modules/
