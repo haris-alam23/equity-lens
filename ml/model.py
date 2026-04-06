@@ -19,9 +19,19 @@ from sklearn.metrics import accuracy_score
 
 from ml.features import FEATURE_COLS, build_feature_dataset, build_live_features
 
-MODEL_PATH = os.path.join(os.path.dirname(__file__), "saved_model.pkl")
-SCALER_PATH = os.path.join(os.path.dirname(__file__), "saved_scaler.pkl")
-META_PATH = os.path.join(os.path.dirname(__file__), "saved_meta.json")
+_MODEL_DIR = os.path.dirname(__file__)
+
+
+def _model_path(ticker: str) -> str:
+    return os.path.join(_MODEL_DIR, f"saved_model_{ticker}.pkl")
+
+
+def _scaler_path(ticker: str) -> str:
+    return os.path.join(_MODEL_DIR, f"saved_scaler_{ticker}.pkl")
+
+
+def _meta_path(ticker: str) -> str:
+    return os.path.join(_MODEL_DIR, f"saved_meta_{ticker}.json")
 
 # Human-readable labels for each feature column
 FEATURE_LABELS: Dict[str, str] = {
@@ -61,9 +71,9 @@ def train_model(ticker: str = "SPY", period: str = "2y") -> Dict[str, Any]:
 
     accuracy = accuracy_score(y_test, model.predict(X_test_s))
 
-    with open(MODEL_PATH, "wb") as f:
+    with open(_model_path(ticker), "wb") as f:
         pickle.dump(model, f)
-    with open(SCALER_PATH, "wb") as f:
+    with open(_scaler_path(ticker), "wb") as f:
         pickle.dump(scaler, f)
 
     accuracy_rounded = round(float(accuracy), 4)
@@ -72,7 +82,7 @@ def train_model(ticker: str = "SPY", period: str = "2y") -> Dict[str, Any]:
         "trained_on": ticker,
         "trained_at": datetime.now(timezone.utc).isoformat(),
     }
-    with open(META_PATH, "w") as f:
+    with open(_meta_path(ticker), "w") as f:
         json.dump(meta, f, indent=2)
 
     return {
@@ -83,26 +93,28 @@ def train_model(ticker: str = "SPY", period: str = "2y") -> Dict[str, Any]:
     }
 
 
-def _load_meta() -> Dict[str, Any]:
-    """Load model metadata from saved_meta.json, or return defaults."""
-    if os.path.exists(META_PATH):
-        with open(META_PATH, "r") as f:
+def _load_meta(ticker: str) -> Dict[str, Any]:
+    """Load per-ticker model metadata, or return defaults."""
+    path = _meta_path(ticker)
+    if os.path.exists(path):
+        with open(path, "r") as f:
             return json.load(f)
-    return {"accuracy": None, "trained_on": "unknown", "trained_at": None}
+    return {"accuracy": None, "trained_on": ticker, "trained_at": None}
 
 
-def _load_or_train():
-    """Load persisted model + scaler, training fresh if not found."""
-    if os.path.exists(MODEL_PATH) and os.path.exists(SCALER_PATH):
-        with open(MODEL_PATH, "rb") as f:
+def _load_or_train(ticker: str):
+    """Load persisted model + scaler for ticker, training fresh if not found."""
+    mp, sp = _model_path(ticker), _scaler_path(ticker)
+    if os.path.exists(mp) and os.path.exists(sp):
+        with open(mp, "rb") as f:
             model = pickle.load(f)
-        with open(SCALER_PATH, "rb") as f:
+        with open(sp, "rb") as f:
             scaler = pickle.load(f)
         return model, scaler
 
-    print("[EquityLens] No saved model found — training on SPY data...")
-    train_model("SPY")
-    return _load_or_train()
+    print(f"[EquityLens] No saved model for {ticker} — training now...")
+    train_model(ticker)
+    return _load_or_train(ticker)
 
 
 def predict_direction(ticker: str, features_dict: Dict) -> Dict[str, Any]:
@@ -113,8 +125,8 @@ def predict_direction(ticker: str, features_dict: Dict) -> Dict[str, Any]:
         ticker, prediction ("Up" / "Down"), confidence (%), direction ("up" / "down"),
         prob_up (%), prob_down (%), feature_importance (top 5), model_accuracy
     """
-    model, scaler = _load_or_train()
-    meta = _load_meta()
+    model, scaler = _load_or_train(ticker)
+    meta = _load_meta(ticker)
 
     X_live = build_live_features(features_dict)
 
