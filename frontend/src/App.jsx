@@ -21,20 +21,20 @@ function HeroEmpty() {
       <div className="relative flex justify-center mb-8">
         <div
           className="absolute inset-0 mx-auto w-32 h-32 rounded-full blur-3xl opacity-20"
-          style={{ background: 'radial-gradient(circle, #6366f1, #a855f7)' }}
+          style={{ background: 'radial-gradient(circle, #0000FF, #00FFFF)' }}
         />
         <div
           className="relative w-16 h-16 rounded-2xl flex items-center justify-center"
           style={{
-            background: 'linear-gradient(135deg, rgba(99,102,241,0.15) 0%, rgba(139,92,246,0.15) 100%)',
-            border: '1px solid rgba(99, 102, 241, 0.2)',
-            boxShadow: '0 0 24px rgba(99,102,241,0.15)',
+            background: 'linear-gradient(135deg, rgba(0,255,255,0.15) 0%, rgba(0,0,255,0.15) 100%)',
+            border: '1px solid rgba(0, 255, 255, 0.2)',
+            boxShadow: '0 0 24px rgba(0,255,255,0.15)',
           }}
         >
           <svg width="28" height="28" viewBox="0 0 48 48" fill="none">
             <path
               d="M10 34L18 22L24 28L32 16L38 22"
-              stroke="rgba(99,102,241,0.8)"
+              stroke="rgba(0,255,255,0.6)"
               strokeWidth="2.5"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -56,9 +56,9 @@ function HeroEmpty() {
             key={f}
             className="text-xs px-3 py-1 rounded-full font-medium"
             style={{
-              background: 'rgba(99, 102, 241, 0.06)',
-              border: '1px solid rgba(99, 102, 241, 0.15)',
-              color: 'rgba(165, 180, 252, 0.7)',
+              background: 'rgba(0, 255, 255, 0.06)',
+              border: '1px solid rgba(0, 255, 255, 0.15)',
+              color: 'rgba(0, 255, 255, 0.7)',
             }}
           >
             {f}
@@ -79,13 +79,30 @@ export default function App() {
       <main className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
         {/* Hero search section */}
         <div className="mb-12 text-center">
+          {/* Logo + product name */}
+          <div className="flex items-center justify-center gap-3 mb-5">
+            <div
+              className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+              style={{
+                background: 'linear-gradient(135deg, #0000FF 0%, #00FFFF 100%)',
+                boxShadow: '0 0 20px rgba(0, 255, 255, 0.35)',
+              }}
+            >
+              <svg width="20" height="20" viewBox="0 0 16 16" fill="none">
+                <path d="M2 12L6 7L9 10L14 4" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                <circle cx="14" cy="4" r="1.5" fill="white" />
+              </svg>
+            </div>
+            <span className="text-2xl font-extrabold tracking-tight gradient-text">EquityLens</span>
+          </div>
+
           <div className="mb-2">
             <span
               className="text-xs font-mono font-semibold tracking-widest uppercase px-3 py-1 rounded-full"
               style={{
-                background: 'rgba(99,102,241,0.08)',
-                border: '1px solid rgba(99,102,241,0.2)',
-                color: 'rgba(129, 140, 248, 0.9)',
+                background: 'rgba(0, 255, 255, 0.08)',
+                border: '1px solid rgba(0, 255, 255, 0.2)',
+                color: 'rgba(0, 255, 255, 0.9)',
               }}
             >
               Powered by ML + NLP
@@ -107,15 +124,15 @@ export default function App() {
           <div className="flex items-center gap-2.5 mb-7 animate-fade-in-up-1">
             <div
               className="w-1.5 h-1.5 rounded-full bg-accent"
-              style={{ boxShadow: '0 0 6px rgba(99,102,241,0.8)' }}
+              style={{ boxShadow: '0 0 6px rgba(0,255,255,0.8)' }}
             />
             <span className="text-sm text-gray-500">Showing results for</span>
             <span
               className="font-mono font-bold text-sm px-2.5 py-0.5 rounded-lg"
               style={{
-                background: 'rgba(99,102,241,0.1)',
-                border: '1px solid rgba(99,102,241,0.25)',
-                color: '#a5b4fc',
+                background: 'rgba(0,255,255,0.1)',
+                border: '1px solid rgba(0,255,255,0.25)',
+                color: '#00FFFF',
               }}
             >
               {activeTicker}
@@ -180,8 +197,8 @@ export default function App() {
       <footer
         className="mt-20 py-8"
         style={{
-          borderTop: '1px solid rgba(99, 102, 241, 0.08)',
-          background: 'linear-gradient(to bottom, transparent, rgba(99,102,241,0.03))',
+          borderTop: '1px solid rgba(0, 255, 255, 0.08)',
+          background: 'linear-gradient(to bottom, transparent, rgba(0,255,255,0.03))',
         }}
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">

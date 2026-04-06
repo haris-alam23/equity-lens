@@ -14,7 +14,7 @@ function ProbabilityBar({ probUp, probDown }) {
       </div>
       <div
         className="w-full h-4 rounded-full overflow-hidden flex"
-        style={{ background: '#080a0f' }}
+        style={{ background: '#050A30' }}
       >
         <div
           className="h-full transition-all duration-700"
@@ -68,13 +68,13 @@ function FeatureImportanceChart({ features }) {
               </div>
               <div
                 className="w-full rounded-full overflow-hidden"
-                style={{ height: '5px', background: '#080a0f' }}
+                style={{ height: '5px', background: '#050A30' }}
               >
                 <div
                   className="h-full rounded-full transition-all duration-700"
                   style={{
                     width: `${pct}%`,
-                    background: 'linear-gradient(90deg, #6366f1, #818cf8)',
+                    background: 'linear-gradient(90deg, #0000FF, #00FFFF)',
                   }}
                 />
               </div>
@@ -143,7 +143,7 @@ export default function PredictionCard({ data, loading, error }) {
       {/* Up / Down probability bar */}
       <div
         className="p-4 rounded-xl border mb-3"
-        style={{ background: 'rgba(8, 10, 15, 0.6)', borderColor: 'rgba(99, 102, 241, 0.1)' }}
+        style={{ background: 'rgba(5, 10, 48, 0.6)', borderColor: 'rgba(0, 255, 255, 0.1)' }}
       >
         <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
           Probability Breakdown
@@ -155,7 +155,7 @@ export default function PredictionCard({ data, loading, error }) {
       {feature_importance && feature_importance.length > 0 && (
         <div
           className="p-4 rounded-xl border mb-3"
-          style={{ background: 'rgba(8, 10, 15, 0.6)', borderColor: 'rgba(99, 102, 241, 0.1)' }}
+          style={{ background: 'rgba(5, 10, 48, 0.6)', borderColor: 'rgba(0, 255, 255, 0.1)' }}
         >
           <FeatureImportanceChart features={feature_importance} />
         </div>
@@ -170,7 +170,7 @@ export default function PredictionCard({ data, loading, error }) {
         {model_accuracy != null && (
           <span
             className="shrink-0 text-xs font-mono px-2 py-1 rounded-md whitespace-nowrap"
-            style={{ background: 'rgba(8, 10, 15, 0.6)', border: '1px solid rgba(99, 102, 241, 0.1)', color: '#6b7280' }}
+            style={{ background: 'rgba(5, 10, 48, 0.6)', border: '1px solid rgba(0, 255, 255, 0.1)', color: '#6b7280' }}
           >
             Model accuracy: {(model_accuracy * 100).toFixed(1)}%
           </span>

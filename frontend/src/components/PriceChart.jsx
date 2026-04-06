@@ -59,7 +59,7 @@ function VolumeTooltip({ active, payload, label }) {
     <div className="bg-card border border-border rounded-xl p-3 text-xs shadow-xl">
       <p className="text-gray-400 mb-1 font-medium">{formatDate(label)}</p>
       <div className="flex items-center justify-between gap-4">
-        <span style={{ color: '#6366f1' }}>Volume</span>
+        <span style={{ color: '#00FFFF' }}>Volume</span>
         <span className="font-mono font-semibold">{formatVolume(payload[0]?.value)}</span>
       </div>
     </div>
@@ -155,11 +155,12 @@ export default function PriceChart({ data: initialData, loading: externalLoading
                 key={value}
                 onClick={() => handlePeriodChange(value)}
                 disabled={loading}
-                className={`px-2.5 py-1 rounded-full text-xs font-semibold transition-colors ${
+                className="px-2.5 py-1 rounded-full text-xs font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                style={
                   period === value
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-gray-200'
-                } disabled:opacity-50 disabled:cursor-not-allowed`}
+                    ? { background: 'linear-gradient(135deg, #0000FF, #00FFFF)', color: '#fff', boxShadow: '0 0 8px rgba(0,255,255,0.3)' }
+                    : { background: 'rgba(255,255,255,0.05)', color: '#6b7280' }
+                }
               >
                 {label}
               </button>
@@ -179,7 +180,7 @@ export default function PriceChart({ data: initialData, loading: externalLoading
       {/* Main price chart */}
       <ResponsiveContainer width="100%" height={280}>
         <LineChart data={sampled} margin={{ top: 4, right: 4, bottom: 0, left: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#2a2d3a" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="#0D1B6E" vertical={false} />
           <XAxis
             dataKey="date"
             tickFormatter={formatDate}
@@ -205,10 +206,10 @@ export default function PriceChart({ data: initialData, loading: externalLoading
             type="monotone"
             dataKey="close"
             name="Close"
-            stroke="#6366f1"
+            stroke="#0000FF"
             strokeWidth={2}
             dot={false}
-            activeDot={{ r: 4, fill: '#6366f1' }}
+            activeDot={{ r: 4, fill: '#0000FF' }}
           />
           <Line
             type="monotone"
@@ -241,7 +242,7 @@ export default function PriceChart({ data: initialData, loading: externalLoading
             <Tooltip content={<VolumeTooltip />} cursor={{ fill: 'rgba(255,255,255,0.03)' }} />
             <Bar dataKey="volume" name="Volume" isAnimationActive={false}>
               {sampled.map((_, idx) => (
-                <Cell key={idx} fill="rgba(99,102,241,0.5)" />
+                <Cell key={idx} fill="rgba(0,0,255,0.5)" />
               ))}
             </Bar>
           </BarChart>

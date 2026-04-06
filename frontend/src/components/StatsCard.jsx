@@ -25,7 +25,8 @@ function WeekRangeBar({ low, high, current }) {
     <div className="w-full">
       <div className="relative h-1.5 rounded-full bg-white/10 mt-1">
         <div
-          className="absolute top-0 left-0 h-full rounded-full bg-indigo-500"
+          className="absolute top-0 left-0 h-full rounded-full"
+          style={{ background: 'linear-gradient(90deg, #0000FF, #00FFFF)' }}
           style={{ width: `${pct}%` }}
         />
         <div

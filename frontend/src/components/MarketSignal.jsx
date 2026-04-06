@@ -22,7 +22,7 @@ function SignalGauge({ score }) {
       <path
         d="M 16 72 A 54 54 0 0 1 124 72"
         fill="none"
-        stroke="#1a1d2e"
+        stroke="#0D1B6E"
         strokeWidth="10"
         strokeLinecap="round"
       />
@@ -61,7 +61,7 @@ export default function MarketSignal({ data, loading, error }) {
 
   return (
     <div className="card animate-fade-in-up-3">
-      <h3 className="text-xs font-semibold tracking-widest mb-5 uppercase" style={{ color: 'rgba(99,102,241,0.7)' }}>
+      <h3 className="text-xs font-semibold tracking-widest mb-5 uppercase" style={{ color: 'rgba(0,255,255,0.7)' }}>
         Market Signal
       </h3>
 
@@ -84,9 +84,9 @@ export default function MarketSignal({ data, loading, error }) {
 
       <div
         className="mt-4 p-4 rounded-xl"
-        style={{ background: 'rgba(8, 10, 15, 0.6)', border: '1px solid rgba(99, 102, 241, 0.1)' }}
+        style={{ background: 'rgba(5, 10, 48, 0.6)', border: '1px solid rgba(99, 102, 241, 0.1)' }}
       >
-        <p className="text-xs font-semibold uppercase tracking-widest mb-1.5" style={{ color: 'rgba(99,102,241,0.5)' }}>
+        <p className="text-xs font-semibold uppercase tracking-widest mb-1.5" style={{ color: 'rgba(0,255,255,0.5)' }}>
           Explanation
         </p>
         <p className="text-sm text-gray-300 leading-relaxed">{explanation}</p>

@@ -89,8 +89,8 @@ export default function SearchBar({ onSearch, isLoading }) {
             className="search-input-glow w-full rounded-xl px-4 py-3.5 pl-9 text-sm font-mono
                        placeholder:text-gray-600 transition-all"
             style={{
-              background: '#0e1117',
-              border: '1px solid rgba(99, 102, 241, 0.2)',
+              background: '#07103A',
+              border: '1px solid rgba(0, 255, 255, 0.2)',
               color: 'white',
             }}
             disabled={isLoading}
@@ -104,11 +104,11 @@ export default function SearchBar({ onSearch, isLoading }) {
           className="px-6 py-3.5 rounded-xl text-sm font-semibold transition-all whitespace-nowrap disabled:opacity-40 disabled:cursor-not-allowed"
           style={{
             background: isLoading || !input.trim()
-              ? 'rgba(99, 102, 241, 0.3)'
-              : 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+              ? 'rgba(0, 255, 255, 0.15)'
+              : 'linear-gradient(135deg, #0000FF 0%, #00FFFF 100%)',
             boxShadow: isLoading || !input.trim()
               ? 'none'
-              : '0 0 16px rgba(99, 102, 241, 0.35)',
+              : '0 0 16px rgba(0, 255, 255, 0.3)',
             color: 'white',
           }}
         >
@@ -160,8 +160,8 @@ export default function SearchBar({ onSearch, isLoading }) {
             className="text-xs font-mono text-gray-500 hover:text-accent-light disabled:opacity-40
                        transition-colors px-2 py-0.5 rounded-md"
             style={{
-              border: '1px solid rgba(99, 102, 241, 0.15)',
-              background: 'rgba(99, 102, 241, 0.04)',
+              border: '1px solid rgba(0, 255, 255, 0.15)',
+              background: 'rgba(0, 255, 255, 0.04)',
             }}
           >
             {s}

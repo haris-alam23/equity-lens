@@ -4,11 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        surface: '#080a0f',
-        card: '#0e1117',
-        border: '#1a1d2e',
-        accent: '#6366f1',
-        'accent-light': '#818cf8',
+        surface: '#020818',
+        card: '#07103A',
+        border: '#0D1B6E',
+        accent: '#0000FF',
+        'accent-light': '#00FFFF',
         bullish: '#22c55e',
         bearish: '#ef4444',
         neutral: '#f59e0b',
@@ -18,8 +18,8 @@ export default {
         mono: ['JetBrains Mono', 'monospace'],
       },
       boxShadow: {
-        'glow-sm': '0 0 12px rgba(99, 102, 241, 0.15)',
-        'glow-md': '0 0 24px rgba(99, 102, 241, 0.2)',
+        'glow-sm': '0 0 12px rgba(0, 255, 255, 0.15)',
+        'glow-md': '0 0 24px rgba(0, 255, 255, 0.2)',
       },
     },
   },

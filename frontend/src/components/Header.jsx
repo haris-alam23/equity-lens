@@ -9,10 +9,10 @@ function TickerItem({ symbol, price, change, pct }) {
 
   return (
     <div
-      className="flex items-center gap-2 px-4 py-1.5 shrink-0"
-      style={{ borderRight: '1px solid rgba(99,102,241,0.1)' }}
+      className="flex items-center gap-2.5 px-5 py-1.5 shrink-0"
+      style={{ borderRight: '1px solid rgba(0, 255, 255, 0.08)' }}
     >
-      <span className="text-xs font-mono font-semibold text-gray-300">{symbol}</span>
+      <span className="text-xs font-mono font-bold" style={{ color: '#00FFFF' }}>{symbol}</span>
       {price !== null ? (
         <>
           <span className="text-xs font-mono text-white">
@@ -26,18 +26,17 @@ function TickerItem({ symbol, price, change, pct }) {
           </span>
         </>
       ) : (
-        <span className="text-xs font-mono text-gray-600">--</span>
+        <span className="text-xs font-mono" style={{ color: 'rgba(0,255,255,0.25)' }}>--</span>
       )}
     </div>
   )
 }
 
 function TickerTape({ tickers }) {
-  // Duplicate the list for seamless looping
   const items = [...tickers, ...tickers]
 
   return (
-    <div className="overflow-hidden" style={{ width: '480px', maxWidth: 'calc(100vw - 220px)' }}>
+    <div className="overflow-hidden flex-1">
       <div className="ticker-track">
         {items.map((t, i) => (
           <TickerItem
@@ -67,8 +66,8 @@ export default function Header() {
       if (prices.length < 2) throw new Error('not enough data')
       const latest = prices[prices.length - 1]
       const prev = prices[prices.length - 2]
-      const price = latest.close ?? latest.price ?? null
-      const prevPrice = prev.close ?? prev.price ?? null
+      const price = latest.close ?? null
+      const prevPrice = prev.close ?? null
       if (!price || !prevPrice) throw new Error('no price')
       const change = price - prevPrice
       const pct = (change / prevPrice) * 100
@@ -93,43 +92,25 @@ export default function Header() {
     <header
       className="sticky top-0 z-50"
       style={{
-        background: 'rgba(8, 10, 15, 0.85)',
+        background: 'rgba(2, 8, 24, 0.92)',
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
-        borderBottom: '1px solid rgba(99, 102, 241, 0.12)',
-        boxShadow: '0 1px 0 rgba(99, 102, 241, 0.05)',
+        borderBottom: '1px solid rgba(0, 255, 255, 0.1)',
+        boxShadow: '0 1px 0 rgba(0, 255, 255, 0.04)',
       }}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
-        {/* Brand */}
-        <div className="flex items-center gap-2.5 shrink-0">
-          <div
-            className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
-            style={{
-              background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
-              boxShadow: '0 0 12px rgba(99, 102, 241, 0.4)',
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M2 12L6 7L9 10L14 4" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-              <circle cx="14" cy="4" r="1.5" fill="white" />
-            </svg>
-          </div>
-          <div>
-            <span className="text-base font-bold tracking-tight gradient-text">EquityLens</span>
-            <span className="hidden sm:block text-xs text-gray-600 leading-none mt-0.5">
-              Market Intelligence
-            </span>
-          </div>
-        </div>
-
-        {/* Ticker tape */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center gap-4">
+        {/* Ticker tape — takes all available space */}
         <TickerTape tickers={tickers} />
 
-        {/* Status badge */}
+        {/* LIVE badge */}
         <div
-          className="hidden md:flex items-center gap-1.5 shrink-0 px-2.5 py-1 rounded-full text-xs font-mono text-gray-500"
-          style={{ border: '1px solid rgba(99, 102, 241, 0.1)', background: 'rgba(99,102,241,0.04)' }}
+          className="flex items-center gap-1.5 shrink-0 px-2.5 py-1 rounded-full text-xs font-mono"
+          style={{
+            border: '1px solid rgba(0, 255, 255, 0.15)',
+            background: 'rgba(0, 255, 255, 0.04)',
+            color: 'rgba(0, 255, 255, 0.6)',
+          }}
         >
           <span
             className="w-1.5 h-1.5 rounded-full bg-green-400"
