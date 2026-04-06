@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 
 const TICKER_SYMBOLS = ['SPY', 'QQQ', 'NVDA', 'BTC-USD', 'AAPL', 'TSLA']
+const API_BASE = import.meta.env.VITE_API_URL || ''
 
 function TickerItem({ symbol, price, change, pct }) {
   const isPositive = change >= 0
@@ -59,7 +60,7 @@ export default function Header() {
 
   const fetchTicker = useCallback(async (symbol) => {
     try {
-      const res = await fetch(`/api/stock/${symbol}`)
+      const res = await fetch(`${API_BASE}/api/stock/${symbol}`)
       if (!res.ok) throw new Error('fetch failed')
       const json = await res.json()
       const prices = json?.prices ?? []
