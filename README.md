@@ -2,6 +2,7 @@
 
 A full-stack MVP combining real-time stock data, news sentiment analysis, and ML predictions into a single, clean interface.
 
+Access it here: https://equity-lens-ai.vercel.app/
 ---
 
 ## Project Structure
